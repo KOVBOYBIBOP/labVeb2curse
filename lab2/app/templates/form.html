@@ -1,0 +1,31 @@
+{% extends 'base.html' %} 
+{% block content %}
+<div style="margin-top: 20px; border: 2px solid #ccc; border-radius: 10px; padding: 20px;">
+    <h1 style="font-family: Arial, sans-serif; color: #333;">Форма отправки</h1>
+    <form action="" method="post" style="margin-bottom: 20px;">
+        <label for="form1" style="font-weight: bold;">Тема сообщения</label>
+        <input
+            type="text"
+            id="form1"
+            name="topic"
+            value="{{request.form['topic']}}"
+            style="padding: 8px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 10px; width: 100%;"
+        />
+        <label for="form2" style="font-weight: bold;">Текст сообщения</label>
+        <textarea type="text" id="form2" name="text" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 10px; width: 100%;">
+            {{request.form.get('text', '')}}
+        </textarea>
+        <button type="submit" style="padding: 10px 20px; border-radius: 5px; border: none; background-color: #007bff; color: #fff; cursor: pointer;">Отправить!</button>
+    </form>
+    <table class="table" style="width: 100%; border-collapse: collapse;">
+        <tbody>
+            {% for key, value in request.form.items() %}
+            <tr>
+                <td style="border: 1px solid #ccc; padding: 8px; font-weight: bold; width: 50%;">{{ key }}</td>
+                <td style="border: 1px solid #ccc; padding: 8px; width: 50%;">{{ value }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

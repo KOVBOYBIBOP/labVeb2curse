@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 style="font-family: Arial, sans-serif; color: #333;">Калькулятор</h1>
+    <form action="" method="post" style="margin-top: 20px; padding: 20px; border: 2px solid #007bff; border-radius: 10px; background-color: #f9f9f9;">
+        <input type="text" id="number1" name="number1" value="{{request.form['number1']}}" style="padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-right: 10px;">
+        <select name="operator" id="operator" style="padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-right: 10px;">
+            <option {% if request.form['operator'] == '+' %} selected {% endif %} value="+">+</option>
+            <option {% if request.form['operator'] == '-' %} selected {% endif %} value="-">-</option>
+            <option {% if request.form['operator'] == '*' %} selected {% endif %} value="*">*</option>
+            <option {% if request.form['operator'] == '/' %} selected {% endif %} value="/">/</option>
+        </select>
+        <input type="text" id="number2" name="number2" value="{{request.form['number2']}}" style="padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-right: 10px;">
+        <button type="submit" style="padding: 10px 20px; border-radius: 5px; border: none; background-color: #007bff; color: #fff; cursor: pointer;"> = </button>
+        <input type="text" id="result" name="result" value="{{res}}" style="padding: 10px; border-radius: 5px; border: 1px solid #ccc;" disabled>
+    </form>
+    {% if msg %} <div class="text-danger" style="color: red; margin-top: 10px;"> {{msg}}</div> {% endif %}
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %} 
+{% block content %}
+<form class="row g-3" action="" method="post" style="margin-top: 20px; padding: 20px; border: 2px solid #ccc; border-radius: 10px;">
+  <div class="col-md-6">
+    <label for="check_number1" class="form-label" style="font-weight: bold;">Введите номер телефона</label>
+    <input
+      class="form-control {% if msg=='3' %} is-valid {% elif msg=='1' or msg=='2' %} is-invalid {% else %} {% endif %}"
+      id="check_number1"
+      name="check_number1"
+      {% if request.form["check_number1"] %}
+      value = "{{ request.form['check_number1'] }}"
+      {% endif %}
+      style="padding: 10px; border-radius: 5px; border: 1px solid #ccc;"
+    ></input>
+    {% if msg == "1"%} 
+    <div class="invalid-feedback" style="color: red;">Недопустимый ввод. Неверное количество цифр.</div>
+  </div>
+  {% elif msg == "2" %}
+  <div class="invalid-feedback" style="color: red;">Недопустимый ввод. В номере телефона встречаются недопустимые символы.</div>
+  </div>
+  {% elif msg == "3" %}
+  <div class="valid-feedback" style="color: green;">Допустимый ввод. Приведенный номер: {{ phone_number }}</div>
+  </div>
+  {% endif %}
+  <div class="col-12">
+    <button class="btn btn-primary" type="submit" style="padding: 10px 20px; border-radius: 5px; border: none; cursor: pointer;">Проверить</button>
+  </div>
+</form>
+{% endblock %}
